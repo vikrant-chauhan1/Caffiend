@@ -159,7 +159,7 @@ h2 {
 }
 
 .coffee-button-selected {
-  border-color: var(--border-highlight) !important;
+  border-color: yellow !important;
 }
 
 .stats-grid,
