@@ -1,6 +1,12 @@
+import Authentication from "./Authentication"
+import Modal from "./Modal"
+import { useState } from "react"
+
 export default function Layout(props){
 
     const {children} = props
+
+    const[showModal,setShowModal] = useState(false)
 
     const header=(
         <header>
@@ -8,8 +14,8 @@ export default function Layout(props){
                 <h1 className="text-gradient">CAFFIEND</h1>
                 <p>For Coffee Insatiates</p>
             </div>
-            <button>
-                <p>Sign Up For Free</p>
+            <button onClick={()=>setShowModal(true)}>
+                <p >Sign Up For Free</p>
                 <i class="fa-solid fa-mug-hot"></i>
             </button>
         </header>
@@ -21,6 +27,12 @@ export default function Layout(props){
     )
     return(
         <>
+            {showModal && (
+                <Modal handleCloseModal={()=>{setShowModal(false)}} >
+                <Authentication />
+
+                </Modal>
+            )}
             {header}
             <main>
                 {children}
