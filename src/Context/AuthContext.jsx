@@ -3,6 +3,7 @@ import { createUserWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEm
 import { useState, useEffect, useContext, createContext } from 'react'
 import { auth, db } from '../../Firebase'
 import { doc, getDoc } from 'firebase/firestore'
+import { use } from 'react'
 
 const AuthContext = createContext()
 
@@ -25,7 +26,7 @@ export function AuthProvider(props){
         return signInWithEmailAndPassword(auth,email,password);
     }
     function logout(){
-        setUser(null);
+        setGlobalUser(null);
         setGlobalData(null);
         return signOut(auth)
     }
@@ -39,6 +40,9 @@ export function AuthProvider(props){
     
     useEffect(()=>{
         const unsubscribe=onAuthStateChanged(auth, async (user)=>{
+           console.log("CURRENT USER",user)
+           setGlobalUser(user);
+           
             if(!user) {
                 console.log("No active user")
                 return
@@ -65,7 +69,7 @@ export function AuthProvider(props){
                 console.log(err.message)
 
             }finally{
-                setIsLoading(true);
+                setIsLoading(false);
             }
         })
         return unsubscribe;

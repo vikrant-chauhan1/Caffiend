@@ -1,10 +1,12 @@
+import { useAuth } from "../Context/AuthContext"
 import Authentication from "./Authentication"
 import Modal from "./Modal"
 import { useState } from "react"
 
 export default function Layout(props){
 
-    const {children} = props
+    const {children} = props;
+    const {globalUser,logout}= useAuth();
 
     const[showModal,setShowModal] = useState(false)
 
@@ -14,10 +16,15 @@ export default function Layout(props){
                 <h1 className="text-gradient">CAFFIEND</h1>
                 <p>For Coffee Insatiates</p>
             </div>
-            <button onClick={()=>setShowModal(true)}>
+            {globalUser?
+            (<button onClick={logout}>
+                <p >Logout</p>
+               
+            </button>) :
+            (<button onClick={()=>setShowModal(true)}>
                 <p >Sign Up For Free</p>
                 <i class="fa-solid fa-mug-hot"></i>
-            </button>
+            </button>)}
         </header>
     )
     const footer=(
@@ -29,7 +36,7 @@ export default function Layout(props){
         <>
             {showModal && (
                 <Modal handleCloseModal={()=>{setShowModal(false)}} >
-                <Authentication />
+                <Authentication handleCloseModal={()=>{setShowModal(false)}} />
 
                 </Modal>
             )}
