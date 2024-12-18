@@ -39,7 +39,10 @@ export function AuthProvider(props){
     
     useEffect(()=>{
         const unsubscribe=onAuthStateChanged(auth, async (user)=>{
-            if(!user) {return} //if there is no user empty the userstate and return from this
+            if(!user) {
+                console.log("No active user")
+                return
+            } //if there is no user empty the userstate and return from this
 
             // if there is a user then check for its data in database and if they do then fetch the data and updatethe globalstate
             try{
@@ -48,6 +51,13 @@ export function AuthProvider(props){
                 const docRef = doc(db,"users",user.uid) ;
                 // then we retrieve it or say snapshot it
                 const docSnap= await getDoc(docRef);
+
+                let firebaseData = {}
+                if(docSnap.exists()){
+                    console.log("Found User Data");
+                    firebaseData = docSnap.data();
+                }
+                setGlobalData(firebaseData)
 
 
             }

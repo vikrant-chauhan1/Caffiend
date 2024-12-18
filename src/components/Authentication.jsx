@@ -1,5 +1,8 @@
 import { use } from "react";
 import { useState } from "react";
+import { useAuth } from "../Context/AuthContext";
+
+
 
 
 export default function Authentication(){
@@ -9,7 +12,32 @@ export default function Authentication(){
     const [password,setPassword] = useState("");
     const [isAuthenticating,setIsAuthenticating]= useState(false);
 
+    const {signup,login}= useAuth()
+
+
     async function handleAuthentication(){
+        if(!email || email.includes("@")|| !password || password.length <6|| isAuthenticating){
+            return
+        }
+        try{
+            setIsAuthenticating(true)
+
+            if(isRegistration){
+                await signup(email,password)
+            }else{
+                await login(email,password)
+            }
+        }catch(err){
+            console.log(err.message);
+        }finally{
+            setIsAuthenticating(false)
+        }
+
+        if(isRegistration){
+            // register a user
+        }else{
+            // login a user
+        }
 
     }
     return(
