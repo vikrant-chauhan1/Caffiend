@@ -20,7 +20,7 @@ export const statusLevels = {
 }
 
 export const coffeeConsumptionHistory = {
-    "1727579064032": { "name": "Americano", "cost": 5.52 },
+    /* "1727579064032": { "name": "Americano", "cost": 5.52 },
     "1727629263026": { "name": "Rockstar Energy (16oz)", "cost": 6.78 },
     "1727571485301": { "name": "Macchiato", "cost": 6.93 },
     "1727585485245": { "name": "Instant Coffee (1 tsp)", "cost": 4.90 },
@@ -62,7 +62,7 @@ export const coffeeConsumptionHistory = {
     "1727626471677": { "name": "Reign Energy Drink (16oz)", "cost": 3.24 },
     "1727618530023": { "name": "Zipfizz (1 tube)", "cost": 6.99 },
     "1727616747401": { "name": "Turkish Coffee", "cost": 5.38 },
-    "1727635847332": { "name": "Black Coffee (8oz)", "cost": 6.11 }
+    "1727635847332": { "name": "Black Coffee (8oz)", "cost": 6.11 } */
 }
 
 export const coffeeOptions = [
